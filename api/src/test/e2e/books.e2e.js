@@ -1,6 +1,5 @@
 const request = require("supertest");
 const createApp = require("../../app");
-const generateFakeData = require("../../utils/generateFakeData");
 
 describe("Books", () => {
   let app;
@@ -49,5 +48,22 @@ describe("Books", () => {
       }))
     ).toEqual(testData);
     expect(response.body).toHaveLength(testData.length);
+  });
+
+  test("should post a book and return it", async () => {
+    const book = {
+      name: "The Fellowship of the Ring",
+      releaseYear: new Date("1954-07-29"),
+    };
+    const response = await request(app).post("/api/v1/books").send(book);
+    const body = response.body;
+    const { _id, ...rest } = body;
+
+    expect(response.status).toBe(201);
+    expect(body).toBeDefined();
+    expect({
+      ...rest,
+      releaseYear: new Date(rest.releaseYear),
+    }).toEqual(book);
   });
 });
