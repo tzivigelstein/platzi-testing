@@ -11,7 +11,7 @@
     "test:e2e": "jest --config ./src/test/e2e/jest-e2e.json --forceExit",
     "test:integration": "jest --config ./src/test/integration/jest-integration.json --forceExit",
     "test:coverage": "jest --coverage",
-    "prettier": "prettier --check .",
+    "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write ."
   },
   "keywords": [],
