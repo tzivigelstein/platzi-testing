@@ -1,0 +1,19 @@
+{
+  "name": "platzi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/demos/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "jest",
+    "testing"
+  ],
+  "author": "Tzivi Gelstein",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "29.3.1"
+  }
+}
