@@ -28,3 +28,21 @@ jobs:
       - name: Run unit tests
         shell: bash
         run: npm run test
+
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+          cache: "npm"
+          cache-dependency-path: ./api/package-lock.json
+      - name: Install dependencies
+        shell: bash
+        run: npm ci
+      - name: Run prettier
+        shell: bash
+        run: npm run prettier:fix
