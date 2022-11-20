@@ -3,8 +3,8 @@ name: API CI
 on:
   push:
     paths:
-      - "./api/**"
-      - ".github/workflows/api-ci.yml"
+      - './api/**'
+      - '.github/workflows/api-ci.yml'
 
 defaults:
   run:
@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-          cache: "npm"
+          cache: 'npm'
           cache-dependency-path: ./api/package-lock.json
       - name: Install dependencies
         shell: bash
@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-          cache: "npm"
+          cache: 'npm'
           cache-dependency-path: ./api/package-lock.json
       - name: Install dependencies
         shell: bash
@@ -45,3 +45,30 @@ jobs:
       - name: Run unit tests
         shell: bash
         run: npm run test
+
+  e2e:
+    runs-on: ubuntu-latest
+    container:
+      image: node:16
+
+    services:
+      mongo-e2e:
+        image: mongo:4.4
+        ports:
+          - 27018:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: root
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        shell: bash
+        run: npm ci
+      - name: Run e2e tests
+        shell: bash
+        run: npm run test:e2e
+        env:
+          MONGO_DB_NAME: demo
+          MONGO_URL_E2E: mongodb://root:root@mongo-e2e:27018?retryWrites=true&writeConcern=majority
