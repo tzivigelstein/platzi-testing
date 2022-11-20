@@ -22,6 +22,10 @@ describe('Books', () => {
   beforeAll(() => {
     app = createApp();
     server = app.listen(3001);
+    console.log({
+      environment: process.env.NODE_ENV,
+      url: process.env.MONGO_URL_E2E,
+    });
   });
 
   beforeEach(async () => {
