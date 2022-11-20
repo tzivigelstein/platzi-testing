@@ -1,21 +1,21 @@
-const request = require("supertest");
-const createApp = require("../../app");
+const request = require('supertest');
+const createApp = require('../../app');
 
-describe("Books", () => {
+describe('Books', () => {
   let app;
   let server;
   const testData = [
     {
-      name: "The Lord of the Rings",
-      releaseYear: new Date("1954-07-29"),
+      name: 'The Lord of the Rings',
+      releaseYear: new Date('1954-07-29'),
     },
     {
-      name: "The Hobbit",
-      releaseYear: new Date("1937-09-21"),
+      name: 'The Hobbit',
+      releaseYear: new Date('1937-09-21'),
     },
     {
-      name: "The Silmarillion",
-      releaseYear: new Date("1977-09-15"),
+      name: 'The Silmarillion',
+      releaseYear: new Date('1977-09-15'),
     },
   ];
 
@@ -25,9 +25,9 @@ describe("Books", () => {
   });
 
   beforeEach(async () => {
-    await request(app).delete("/api/v1/books");
+    await request(app).delete('/api/v1/books');
     const promises = testData.map((book) =>
-      request(app).post("/api/v1/books").send(book)
+      request(app).post('/api/v1/books').send(book)
     );
     await Promise.all(promises);
   });
@@ -36,8 +36,8 @@ describe("Books", () => {
     await server.close();
   });
 
-  test("should return a list of books", async () => {
-    const response = await request(app).get("/api/v1/books");
+  test('should return a list of books', async () => {
+    const response = await request(app).get('/api/v1/books');
 
     expect(response.status).toBe(200);
     expect(response.body).toBeDefined();
@@ -50,12 +50,12 @@ describe("Books", () => {
     expect(response.body).toHaveLength(testData.length);
   });
 
-  test("should post a book and return it", async () => {
+  test('should post a book and return it', async () => {
     const book = {
-      name: "The Fellowship of the Ring",
-      releaseYear: new Date("1954-07-29"),
+      name: 'The Fellowship of the Ring',
+      releaseYear: new Date('1954-07-29'),
     };
-    const response = await request(app).post("/api/v1/books").send(book);
+    const response = await request(app).post('/api/v1/books').send(book);
     const body = response.body;
     const { _id, ...rest } = body;
 

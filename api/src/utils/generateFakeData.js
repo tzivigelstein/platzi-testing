@@ -1,4 +1,4 @@
-const { faker } = require("@faker-js/faker");
+const { faker } = require('@faker-js/faker');
 
 function generateFakeData(amount = 10) {
   return Array(amount)

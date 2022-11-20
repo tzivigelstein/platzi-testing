@@ -1,7 +1,7 @@
-const request = require("supertest");
-const createApp = require("../../app");
+const request = require('supertest');
+const createApp = require('../../app');
 
-describe("Hello world", () => {
+describe('Hello world', () => {
   let app;
   let server;
   beforeAll(() => {
@@ -13,11 +13,11 @@ describe("Hello world", () => {
     await server.close();
   });
 
-  describe("test for [GET /", () => {
+  describe('test for [GET /', () => {
     test("should return 'Hello World!'", async () => {
-      const response = await request(app).get("/");
+      const response = await request(app).get('/');
       expect(response.status).toBe(200);
-      expect(response.text).toBe("Hello World!");
+      expect(response.text).toBe('Hello World!');
     });
   });
 });

@@ -1,8 +1,8 @@
-const { MongoClient, ObjectId } = require("mongodb");
-const { config } = require("../config");
+const { MongoClient, ObjectId } = require('mongodb');
+const { config } = require('../config');
 
 const DB_NAME = config.dbName;
-const MONGO_URI = config.env === "test" ? config.dbUrlE2E : config.dbUrl;
+const MONGO_URI = config.env === 'test' ? config.dbUrlE2E : config.dbUrl;
 
 class MongoLib {
   constructor() {
