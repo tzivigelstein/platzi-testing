@@ -70,4 +70,10 @@ describe('Books', () => {
       releaseYear: new Date(rest.releaseYear),
     }).toEqual(book);
   });
+
+  test('should remove all books', async () => {
+    const response = await request(app).delete('/api/v1/books');
+
+    expect(response.status).toBe(204);
+  });
 });

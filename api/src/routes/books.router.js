@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 
 router.delete('/', async (req, res) => {
   const books = await service.deleteAllBooks();
-  res.status(200).json(books);
+  res.status(204).json(books);
 });
 
 module.exports = router;
